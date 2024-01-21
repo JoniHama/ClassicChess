@@ -8,6 +8,7 @@ Rectangle {
     anchors.fill: parent
     color: "#00000099"
     visible: false
+    z: 100;
 
     function setMessage(newText) {
         endMessage.text = newText;
@@ -47,7 +48,7 @@ Rectangle {
             Text {
                 id: endMessage
                 text: "Game Over"
-                font.pixelSize: dialogBox.width * 0.1
+                font.pixelSize: dialogBox.width * 0.08
                 color: "#fff"
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
@@ -72,7 +73,7 @@ Rectangle {
                 onClicked: {
                    GameController.restartGame();
                    gameOverOverlay.visible = false
-                   menuLoader.source = "UI/MainMenu/MainMenu.qml"
+                   menuLoader.source = "qrc:ChessWithFriends/UI/MainMenu/MainMenu.qml"
                 }
             }
         }

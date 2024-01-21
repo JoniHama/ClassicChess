@@ -98,7 +98,7 @@ Item
                         var dropColumn = Math.round(parent.x / 100) + 1;
                         var dropRow = 8 - Math.round(parent.y / 100);
 
-                        //console.log("DropColumn", dropColumn, "DropRow", dropRow);
+                        console.log("DropColumn", dropColumn, "DropRow", dropRow);
 
                         if (((modelData.isWhite() && GameController.isWhiteTurn) || (!modelData.isWhite() && !GameController.isWhiteTurn)))
                         {
