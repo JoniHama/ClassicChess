@@ -5,7 +5,7 @@ Window {
     width: 1200
     height: 800
     visible: true
-    title: qsTr("Chess")
+    title: qsTr("ClassicChess")
 
     Loader
     {

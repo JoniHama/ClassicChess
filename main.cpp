@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QIcon>
 #include "gamecontroller.h"
 
 static QObject *gameControllerProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
@@ -17,6 +18,8 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
+
+    app.setWindowIcon(QIcon("ChessWithFriends/UI/Assets/icon.png"));
 
     qmlRegisterSingletonType<GameController>("com.chess", 1, 0, "GameController", gameControllerProvider);
     qmlRegisterType<ChessPiece>("com.chess", 1, 0, "ChessPiece");

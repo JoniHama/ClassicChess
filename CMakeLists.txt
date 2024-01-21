@@ -6,12 +6,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 6.4 REQUIRED COMPONENTS Quick)
 
+set(app_icon_resource_windows "${CMAKE_CURRENT_SOURCE_DIR}/UI/Resources/ClassicChess.rc")
+
 qt_standard_project_setup()
 
 qt_add_executable(appChessWithFriends
     main.cpp
     gamecontroller.h
     gamecontroller.cpp
+    ${app_icon_resource_windows}
 )
 
 
@@ -49,6 +52,7 @@ qt_add_qml_module(appChessWithFriends
         UI/Assets/W_Pawn.png
         UI/Assets/W_Queen.png
         UI/Assets/W_Rook.png
+        UI/Assets/icon.png
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
