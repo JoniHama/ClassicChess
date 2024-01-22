@@ -159,7 +159,7 @@ signals:
     void GameModeChanged();
 
 public slots:
-    void completePromotion(ChessPiece* piece, const QString& newType);
+    void completePromotion(ChessPiece* piece, const QString& newType, int newrow, int newcolumn);
 
     void restartGame();
 

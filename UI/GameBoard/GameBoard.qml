@@ -146,6 +146,8 @@ Item
                         function onPawnPromotion(piece, row, column)
                         {
                             promotionDialog.pieceToPromote = piece
+                            promotionDialog.row = row
+                            promotionDialog.column = column
                             promotionDialog.visible = true
                         }
 
@@ -217,33 +219,35 @@ Item
         visible: false
 
         property ChessPiece pieceToPromote: null
+        property int row: null
+        property int column: null
 
         Column {
             Button {
                 text: "Queen"
                 onClicked: {
-                    GameController.completePromotion(promotionDialog.pieceToPromote, "Queen")
+                    GameController.completePromotion(promotionDialog.pieceToPromote, "Queen", promotionDialog.row, promotionDialog.column)
                     promotionDialog.close()
                 }
             }
             Button {
                 text: "Knight"
                 onClicked: {
-                    GameController.completePromotion(promotionDialog.pieceToPromote, "Knight")
+                    GameController.completePromotion(promotionDialog.pieceToPromote, "Knight", promotionDialog.row, promotionDialog.column)
                     promotionDialog.close()
                 }
             }
             Button {
                 text: "Rook"
                 onClicked: {
-                    GameController.completePromotion(promotionDialog.pieceToPromote, "Rook")
+                    GameController.completePromotion(promotionDialog.pieceToPromote, "Rook", promotionDialog.row, promotionDialog.column)
                     promotionDialog.close()
                 }
             }
             Button {
                 text: "Bishop"
                 onClicked: {
-                    GameController.completePromotion(promotionDialog.pieceToPromote, "Bishop")
+                    GameController.completePromotion(promotionDialog.pieceToPromote, "Bishop", row, column)
                     promotionDialog.close()
                 }
             }

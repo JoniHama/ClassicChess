@@ -1182,6 +1182,14 @@ void GameController::completeAIMove()
     }
 
     ChessMove* selectedMove = generateRandomMove();
+
+    ChessPiece* movedPiece = selectedMove->getMovedPiece();
+
+    if(movedPiece->type() == "Pawn" && (selectedMove->getNewPosition().row == 1 || selectedMove->getNewPosition().row == 8))
+    {
+        movedPiece->changeType("Queen");
+    }
+
     //qDebug() << "AI move: " << "Piece: " << selectedMove->getMovedPiece()->name() << " Position change : " << selectedMove->getOriginalPosition() << selectedMove->getNewPosition();
     finishMove(selectedMove->getMovedPiece(), selectedMove->getOriginalPosition(), selectedMove->getNewPosition());
 }
@@ -1246,10 +1254,11 @@ int GameController::moveCounter() const
     return m_moveCounter;
 }
 
-void GameController::completePromotion(ChessPiece *piece, const QString &newType)
+void GameController::completePromotion(ChessPiece *piece, const QString &newType, int newrow, int newcolumn)
 {
     piece->changeType(newType);
-    finishMove(piece, piece->position(), {piece->position().row+1, piece->position().column});
+    Position newPosition = Position{newrow, newcolumn};
+    finishMove(piece, piece->position(), newPosition);
     if(GameMode() == "computer")
     {
         completeAIMove();
