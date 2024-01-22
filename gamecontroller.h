@@ -95,6 +95,8 @@ public:
 
     bool isCastlingValid(ChessPiece* king, ChessPiece* rook, Position newPosition);
 
+    Q_INVOKABLE void checkForMate();
+
     QList<Position> CastlingMoves(ChessPiece* piece);
 
     bool isKingNear(const Position& position1, const Position& position2);
@@ -141,8 +143,8 @@ signals:
     void pieceCaptured(ChessPiece* capturedPiece, int row, int column);
     void pawnPromotion(ChessPiece* piece, int row, int column);
 
-    void whiteKingInCheckChanged();
-    void blackKingInCheckChanged();
+    void whiteKingInCheckChanged(ChessPiece* king = nullptr);
+    void blackKingInCheckChanged(ChessPiece* king = nullptr);
 
     void gameOver(bool isWin, bool isDraw);
 

@@ -470,30 +470,24 @@ void GameController::finishMove(ChessPiece *piece, Position oldPosition, Positio
     {
         //qDebug() << "White in check!";
         gameState.isWhiteInCheck = true;
-        emit whiteKingInCheckChanged();
+        emit whiteKingInCheckChanged(current_board->whiteKing);
     }
     if(isKingInCheck(false))
     {
         //qDebug() << "Black in check!";
         gameState.isBlackInCheck = true;
-        emit blackKingInCheckChanged();
+        emit blackKingInCheckChanged(current_board->blackKing);
     }
 
     // check for stalemate
-    std::vector<ChessPiece*> chesspieces = current_board->getPlayerPieces(isWhiteTurn());
-    QList<Position> validmoves = {};
+    auto possibleMoves = RemoveCheckMoves(isWhiteTurn());
 
-    for(ChessPiece* chesspiece : chesspieces)
-    {
-        validmoves.append(checkValidMoves(chesspiece));
-    }
-
-    if(validmoves.isEmpty() && isKingInCheck(isWhiteTurn()))
+    if(possibleMoves.empty() && isKingInCheck(isWhiteTurn()))
     {
         setGameOver(true);
         emit gameOver(true, false);
     }
-    else if(validmoves.empty())
+    else if(possibleMoves.empty())
     {
         setGameOver(true);
         emit gameOver(false, true);
@@ -868,6 +862,18 @@ bool GameController::isCastlingValid(ChessPiece *king, ChessPiece *rook, Positio
     return true;
 }
 
+void GameController::checkForMate()
+{
+    auto possibleMoves = RemoveCheckMoves(isWhiteTurn());
+
+    if(possibleMoves.empty())
+    {
+        qDebug() << "CHECKMATE!";
+        setGameOver(true);
+        emit gameOver(true, false);
+    }
+}
+
 QList<Position> GameController::CastlingMoves(ChessPiece *piece)
 {
     QList<Position> moves;
@@ -1089,6 +1095,8 @@ QVariantList GameController::getValidMoves(ChessPiece *piece)
         if(possibleMoves.empty())
         {
             qDebug() << "CHECKMATE!";
+            setGameOver(true);
+            emit gameOver(true, false);
         }
         else
         {

@@ -135,11 +135,11 @@ Item
                                 modelData.captured = true;
                             }
                         }
-                        function onWhiteKingInCheckChanged() {
+                        function onWhiteKingInCheckChanged(king) {
                             console.log("White King In Check Changed:", GameController.whiteKingInCheck);
                         }
 
-                        function onBlackKingInCheckChanged() {
+                        function onBlackKingInCheckChanged(king) {
                             console.log("Black King In Check Changed:", GameController.blackKingInCheck);
                         }
 
